@@ -1,0 +1,13 @@
+https://ipapi.co/{$clientIp}/xml
+
+https://www.infoclimat.fr/public-api/gfs/xml?_ll={$lat},{$lon}&_auth=AhhWQQF%2FAyFQfQM0AXdSewVtV2IBdwAnBXkKaQhtVClVPl8%2BBGRdO18xBntXeAQyVHlSMQA7ATFQO1YuCngEZQJoVjoBagNkUD8DZgEuUnkFK1c2ASEAJwVnCmQIZlQpVTNfOwR5XT5fMwZhV3kEMlRnUjEAIAEmUDJWNgpkBGECZlY6AWQDZ1A7A2kBLlJ5BTBXMAE2AD0FYgpvCDFUP1ViX24EM11pXzcGZVd5BDdUZFI7AD4BMFA2VjYKYQR4An5WSwERA3xQfwMjAWRSIAUrV2IBYABs&_c=5c56fd0d26e18569c80798b16aba4ba3
+
+https://carto.g-ny.org/data/cifs/cifs_waze_v2.json
+
+http://api.openweathermap.org/data/2.5/air_pollution?lat=$latitude&lon=$longitude&appid=$apiKey
+
+https://nominatim.openstreetmap.org/search?q=adresse&format=json&limit=1
+
+
+Mathéo Grandjean :
+https://github.com/grandj161u/projet_atmosph-re
