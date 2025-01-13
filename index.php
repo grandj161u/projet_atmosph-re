@@ -17,7 +17,7 @@
 $clientIp = $_SERVER['REMOTE_ADDR'];
 
 // if ($clientIp === '127.0.0.1') {
-$clientIp = '193.50.135.203';
+$clientIp = 'IP A RENTRER';
 // }
 
 // Coordonnées par défaut de l'IUT Charlemagne
@@ -276,7 +276,7 @@ $currentHour = date('H');
     </script>
 
     <br>
-    <a href="https://ipapi.co/193.50.135.203/xml">lien localisation IP</a>
+    <a href="https://ipapi.co/IPARENTRER/xml">lien localisation IP</a>
     <br>
     <a href="https://www.infoclimat.fr/public-api/gfs/xml?_ll=48.682298,6.161118&_auth=AhhWQQF%2FAyFQfQM0AXdSewVtV2IBdwAnBXkKaQhtVClVPl8%2BBGRdO18xBntXeAQyVHlSMQA7ATFQO1YuCngEZQJoVjoBagNkUD8DZgEuUnkFK1c2ASEAJwVnCmQIZlQpVTNfOwR5XT5fMwZhV3kEMlRnUjEAIAEmUDJWNgpkBGECZlY6AWQDZ1A7A2kBLlJ5BTBXMAE2AD0FYgpvCDFUP1ViX24EM11pXzcGZVd5BDdUZFI7AD4BMFA2VjYKYQR4An5WSwERA3xQfwMjAWRSIAUrV2IBYABs&_c=5c56fd0d26e18569c80798b16aba4ba3">lien météo</a>
     <br>
