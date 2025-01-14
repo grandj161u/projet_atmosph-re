@@ -1,8 +1,8 @@
 <?php
-// Configuration du proxy pour tout le script
+// // Configuration du proxy pour tout le script
 // $opts = array(
 //     'http' => array(
-//         'proxy' => 'tcp://www-cache:3128',  // Modifié pour utiliser le proxy webetu
+//         'proxy' => 'tcp://www-cache:3128',
 //         'request_fulluri' => true
 //     ),
 //     'ssl' => array(
