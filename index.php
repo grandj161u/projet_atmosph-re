@@ -13,23 +13,37 @@
 // $context = stream_context_create($opts);
 // stream_context_set_default($opts);
 
-// Obtenir l'adresse IP du client
-$clientIp = $_SERVER['REMOTE_ADDR'];
+// Fonction pour obtenir l'adresse IP de l'utilisateur
+function fetchUserIP()
+{
+    $url = "https://api64.ipify.org?format=json";
 
-// if ($clientIp === '127.0.0.1') {
-$clientIp = 'IP A RENTRER';
-// }
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+    $response = curl_exec($ch);
+
+    if (curl_errno($ch)) {
+        error_log("IP fetch error: " . curl_error($ch));
+        curl_close($ch);
+        return null;
+    }
+
+    curl_close($ch);
+
+    $data = json_decode($response, true);
+    return $data['ip'] ?? null;
+}
+
+// Obtenir l'adresse IP du client
+$clientIp = fetchUserIP();
 
 // Coordonnées par défaut de l'IUT Charlemagne
-$lat = '48.682298';
-$lon = '6.161118';
+$lat = '';
+$lon = '';
 
 $address = "2Ter Bd Charlemagne, 54000 Nancy, France";
-
-$adresseAPIgetGeolocation = "https://ipapi.co/{$clientIp}/xml";
-$adresseAPIgetDonneesMeteo = "https://www.infoclimat.fr/public-api/gfs/xml?_ll={$lat},{$lon}&_auth=AhhWQQF%2FAyFQfQM0AXdSewVtV2IBdwAnBXkKaQhtVClVPl8%2BBGRdO18xBntXeAQyVHlSMQA7ATFQO1YuCngEZQJoVjoBagNkUD8DZgEuUnkFK1c2ASEAJwVnCmQIZlQpVTNfOwR5XT5fMwZhV3kEMlRnUjEAIAEmUDJWNgpkBGECZlY6AWQDZ1A7A2kBLlJ5BTBXMAE2AD0FYgpvCDFUP1ViX24EM11pXzcGZVd5BDdUZFI7AD4BMFA2VjYKYQR4An5WSwERA3xQfwMjAWRSIAUrV2IBYABs&_c=5c56fd0d26e18569c80798b16aba4ba3";
-$adresseAPIgetTrafficData = "https://carto.g-ny.org/data/cifs/cifs_waze_v2.json";
-$adresseAPIgeocodeAddress = "https://nominatim.openstreetmap.org/search?q=" . urlencode($address) . "&format=json&limit=1";
 
 // Fonction pour obtenir les informations de géolocalisation en XML
 function getGeolocation($ip)
@@ -276,13 +290,13 @@ $currentHour = date('H');
     </script>
 
     <br>
-    <a href="https://ipapi.co/IPARENTRER/xml">lien localisation IP</a>
+    <a href="https://ipapi.co/<?php echo $clientIp ?>/xml">lien localisation IP</a>
     <br>
-    <a href="https://www.infoclimat.fr/public-api/gfs/xml?_ll=48.682298,6.161118&_auth=AhhWQQF%2FAyFQfQM0AXdSewVtV2IBdwAnBXkKaQhtVClVPl8%2BBGRdO18xBntXeAQyVHlSMQA7ATFQO1YuCngEZQJoVjoBagNkUD8DZgEuUnkFK1c2ASEAJwVnCmQIZlQpVTNfOwR5XT5fMwZhV3kEMlRnUjEAIAEmUDJWNgpkBGECZlY6AWQDZ1A7A2kBLlJ5BTBXMAE2AD0FYgpvCDFUP1ViX24EM11pXzcGZVd5BDdUZFI7AD4BMFA2VjYKYQR4An5WSwERA3xQfwMjAWRSIAUrV2IBYABs&_c=5c56fd0d26e18569c80798b16aba4ba3">lien météo</a>
+    <a href="https://www.infoclimat.fr/public-api/gfs/xml?_ll=<?php echo $lat ?>,<?php echo $lon ?>&_auth=AhhWQQF%2FAyFQfQM0AXdSewVtV2IBdwAnBXkKaQhtVClVPl8%2BBGRdO18xBntXeAQyVHlSMQA7ATFQO1YuCngEZQJoVjoBagNkUD8DZgEuUnkFK1c2ASEAJwVnCmQIZlQpVTNfOwR5XT5fMwZhV3kEMlRnUjEAIAEmUDJWNgpkBGECZlY6AWQDZ1A7A2kBLlJ5BTBXMAE2AD0FYgpvCDFUP1ViX24EM11pXzcGZVd5BDdUZFI7AD4BMFA2VjYKYQR4An5WSwERA3xQfwMjAWRSIAUrV2IBYABs&_c=5c56fd0d26e18569c80798b16aba4ba3">lien météo</a>
     <br>
     <a href="https://carto.g-ny.org/data/cifs/cifs_waze_v2.json">lien traffic</a>
     <br>
-    <a href="https://nominatim.openstreetmap.org/search?q=2Ter Bd Charlemagne, 54000 Nancy, France&format=json&limit=1">lien geocode</a>
+    <a href="https://nominatim.openstreetmap.org/search?q=<?php echo $address ?>&format=json&limit=1">lien geocode</a>
 
 </body>
 
