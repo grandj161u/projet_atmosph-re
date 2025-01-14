@@ -1,19 +1,14 @@
 <?php
-// // Configuration du proxy pour tout le script
+// // // Configuration du proxy pour tout le script
 // $opts = array(
-//     'http' => array(
-//         'proxy' => 'tcp://www-cache:3128',
-//         'request_fulluri' => true
-//     ),
-//     'ssl' => array(
-//         'verify_peer' => false,
-//         'verify_peer_name' => false
-//     )
+//     'https' => array('proxy' => 'tcp://www-cache:3128', 'request_fulluri' => true),
+//     'ssl' => array('verify_peer' => false, 'verify_peer_name' => false),
+//     'http' => array('proxy' => 'tcp://www-cache:3128', 'request_fulluri' => true)
 // );
-// $context = stream_context_create($opts);
+
 // stream_context_set_default($opts);
 
-// Fonction pour obtenir l'adresse IP de l'utilisateur
+// Fonction pour obtenir l'adresse IP de l'utilisateur (si pas sur webetu)
 function fetchUserIP()
 {
     $url = "https://api64.ipify.org?format=json";
@@ -21,6 +16,10 @@ function fetchUserIP()
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    // curl_setopt($ch, CURLOPT_PROXY, 'www-cache:3128');
+    // curl_setopt($ch, CURLOPT_PROXYTYPE, CURLPROXY_HTTP);
+    // curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+    // curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
 
     $response = curl_exec($ch);
 
@@ -36,8 +35,9 @@ function fetchUserIP()
     return $data['ip'] ?? null;
 }
 
-// Obtenir l'adresse IP du client
-$clientIp = fetchUserIP();
+// Obtenir l'adresse IP du client (si pas sur webetu)
+// $clientIp = fetchUserIP();
+$clientIp = $_SERVER['REMOTE_ADDR'];
 
 // Coordonnées par défaut de l'IUT Charlemagne
 $lat = '';
@@ -54,8 +54,9 @@ function getGeolocation($ip)
     curl_setopt($ch, CURLOPT_URL, $url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     // curl_setopt($ch, CURLOPT_PROXY, 'www-cache:3128');
-    // curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
     // curl_setopt($ch, CURLOPT_PROXYTYPE, CURLPROXY_HTTP);
+    // curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+    // curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
 
     $response = curl_exec($ch);
 
@@ -84,8 +85,9 @@ function getDonneesMeteo($lat, $lon)
     curl_setopt($ch, CURLOPT_URL, $url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     // curl_setopt($ch, CURLOPT_PROXY, 'www-cache:3128');
-    // curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
     // curl_setopt($ch, CURLOPT_PROXYTYPE, CURLPROXY_HTTP);
+    // curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+    // curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
 
     $response = curl_exec($ch);
 
@@ -112,6 +114,10 @@ function getTrafficData()
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    // curl_setopt($ch, CURLOPT_PROXY, 'www-cache:3128');
+    // curl_setopt($ch, CURLOPT_PROXYTYPE, CURLPROXY_HTTP);
+    // curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+    // curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
 
     $response = curl_exec($ch);
 
@@ -136,7 +142,12 @@ function getAirQuality($latitude, $longitude, $apiKey)
     $url = "http://api.openweathermap.org/data/2.5/air_pollution?lat=$latitude&lon=$longitude&appid=$apiKey";
 
     $ch = curl_init($url);
+    curl_setopt($ch, CURLOPT_URL, $url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    // curl_setopt($ch, CURLOPT_PROXY, 'www-cache:3128');
+    // curl_setopt($ch, CURLOPT_PROXYTYPE, CURLPROXY_HTTP);
+    // curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+    // curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
 
     $response = curl_exec($ch);
 
@@ -163,6 +174,10 @@ function geocodeAddress($address)
     curl_setopt($ch, CURLOPT_URL, $url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_USERAGENT, 'projet1/1.0 (matheo.grandjean8@etu.univ-lorraine.fr)');
+    // curl_setopt($ch, CURLOPT_PROXY, 'www-cache:3128');
+    // curl_setopt($ch, CURLOPT_PROXYTYPE, CURLPROXY_HTTP);
+    // curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+    // curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
 
     $response = curl_exec($ch);
 
