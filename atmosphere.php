@@ -36,8 +36,8 @@ function fetchUserIP()
 }
 
 // Obtenir l'adresse IP du client (si pas sur webetu)
-// $clientIp = fetchUserIP();
-$clientIp = $_SERVER['REMOTE_ADDR'];
+$clientIp = fetchUserIP();
+// $clientIp = $_SERVER['REMOTE_ADDR']; // Utiliser cette ligne si sur webetu
 
 // Coordonnées par défaut de l'IUT Charlemagne
 $lat = '';
